@@ -1,0 +1,27 @@
+# Dynamics stability
+	
+atom_style      atomic
+units           metal
+boundary        f f f
+	                
+read_data       x.txt
+                
+newton on
+pair_style      airebo 2.0 1 0
+pair_coeff      * * ./CH.airebo C H
+                              
+neighbor        2.0 bin
+neigh_modify    every 1 
+
+thermo					100
+dump						1 all atom 1000 dump.lammpstrj
+
+velocity 				all create 1000.0 4928459 rot yes dist gaussian
+
+fix 						1 all nve
+fix 						2 all langevin 1000.0 1000.0 0.1 34343
+
+timestep				0.001
+run							10000
+
+# End of file

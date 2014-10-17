@@ -1,0 +1,48 @@
+GUI
+--------------------------------------------------------------------------------
+The software can model up to 4 carbon nanotubes (CNT) at any angle. The origin
+angle is 0, corresponds to the positive x axis, and increases counter-clokwise.
+After inputting the parameters for a tube (n, m, angle, length), hit the 
+generate button to create the tube. You can remove a tube by the remove button.
+When you are done with creating the tubes, adjust the bond length, merge length,
+and damping factor parameters. Merge length describes the maximum allowed
+distance between any two atoms. Atoms that are closer than the merge length are, 
+as the name implies, merged. Damping factor is used in relaxation run to damp 
+the force. 
+The merge button merges the existing tubes by cutting out the intersecting 
+sections of each tube. You can check the atom number below the figure to track
+the amount of atoms. After the merge, the system should be relaxed so that bond 
+length is driven to the desired value. The run button performs a simple 
+simulation. In that, interactions between atoms are limited to first nearest
+neighbors and governed by a spring model. The run terminates if either the 
+number of iterations exceed 10000 or the residual is less than 1e-6. Min 
+distance displays the minimum distance between any two atoms in the system. It 
+should be closer to the bond length. After the run is finished, an output file 
+is written to the output folder with the "final_position.txt" name.
+The as-is button is to output tube positions before the run (merged or not) so 
+that the software can be utilized as a simple CNT modeler. The output filename 
+is then "asis_position.txt". 
+
+LAMMPS
+--------------------------------------------------------------------------------
+The system should further be subjected to statics and dynamics runs by LAMMPS.
+For that, input files "static.in" and "dynamic.in" for LAMMPS are provided in 
+the utility directory. LAMMPS accepts inputs and writes outputs in lammpstrj 
+format. For that, two files that converts between formats are provided. First,   
+XToLammpstrj converts "x.txt" file with 3 columns of x, y, z positions to 
+"x.txt" file with lammpstrj format, hence overwrites the "x.txt" file. Second, 
+LammpstrjToX converts positions from the last step of LAMMPS run in the 
+"dump.txt" file with lammpstrj format back to "x.txt" file with 3 columns of 
+x, y, z positions. Consequently, statics and dynamics runs by LAMMPS should 
+provide enough stability.
+
+Feedback
+--------------------------------------------------------------------------------
+I am aware that there is more room to improve. I will occasionally come back and 
+update the software. In the meantime, please feed me back with your suggestions,
+bug reports, or any other ideas.
+
+Further inquiries
+--------------------------------------------------------------------------------
+For further explanation, e-mail:
+Emre Biyikli (biyikli.emre@gmail.com)
